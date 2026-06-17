@@ -1,1 +1,676 @@
 <h1>Anas Amir</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Storycrafterz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #1a1a2e;
+      --deep:     #16213e;
+      --gold:     #c9a84c;
+      --gold-lt:  #e8c97a;
+      --cream:    #fdf8f0;
+      --white:    #ffffff;
+      --muted:    #6b7280;
+      --border:   #e5e0d8;
+      --red:      #c0392b;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--ink);
+      color: var(--gold-lt);
+      text-align: center;
+      font-size: 13px;
+      padding: 8px 20px;
+      letter-spacing: .04em;
+    }
+    .topbar span { color: var(--gold); font-weight: 600; }
+
+    /* HEADER */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .header-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 72px;
+    }
+    .logo img { height: 48px; object-fit: contain; }
+
+    nav { display: flex; align-items: center; gap: 4px; }
+    .nav-item { position: relative; }
+    .nav-item > a {
+      display: flex; align-items: center; gap: 4px;
+      padding: 8px 14px; border-radius: 6px;
+      font-size: 14px; font-weight: 500; color: var(--ink);
+      text-decoration: none; white-space: nowrap;
+      transition: background .18s, color .18s;
+    }
+    .nav-item > a:hover { background: var(--cream); color: var(--gold); }
+    .nav-item > a .arrow { font-size: 10px; opacity: .5; transition: transform .2s; }
+    .nav-item:hover > a .arrow { transform: rotate(180deg); }
+
+    .dropdown {
+      display: none; position: absolute; top: calc(100% + 4px); left: 0;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,.12);
+      min-width: 220px; padding: 8px 0; z-index: 200;
+    }
+    .nav-item:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block; padding: 9px 20px;
+      font-size: 13.5px; color: var(--ink); text-decoration: none;
+      text-transform: capitalize; transition: background .15s, color .15s;
+    }
+    .dropdown a:hover { background: var(--cream); color: var(--gold); }
+
+    .btn-chat {
+      background: linear-gradient(135deg, var(--gold), #a87c2e);
+      color: var(--white); font-weight: 600; font-size: 14px;
+      padding: 10px 22px; border-radius: 8px; text-decoration: none;
+      white-space: nowrap; transition: opacity .2s, transform .15s;
+      box-shadow: 0 3px 12px rgba(201,168,76,.35);
+    }
+    .btn-chat:hover { opacity: .9; transform: translateY(-1px); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: .3s; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--ink) 0%, var(--deep) 60%, #0f3460 100%);
+      color: var(--white);
+      min-height: 88vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://storycrafterz.com/wp-content/uploads/2026/01/Story-Crafterz-Final-Files-01-scaled.png') center/cover no-repeat;
+      opacity: .08;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1280px; margin: 0 auto; padding: 80px 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(201,168,76,.2); border: 1px solid rgba(201,168,76,.4);
+      color: var(--gold-lt); font-size: 12px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 900; line-height: 1.12;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p { font-size: 17px; line-height: 1.75; color: rgba(255,255,255,.8); margin-bottom: 36px; max-width: 520px; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #a87c2e);
+      color: var(--white); font-weight: 600; font-size: 15px;
+      padding: 14px 32px; border-radius: 8px; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(201,168,76,.4); transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,168,76,.5); }
+    .btn-secondary {
+      border: 2px solid rgba(255,255,255,.4);
+      color: var(--white); font-weight: 500; font-size: 15px;
+      padding: 13px 30px; border-radius: 8px; text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,.08); border-color: var(--gold); }
+
+    .hero-badge {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px; padding: 32px;
+      backdrop-filter: blur(12px);
+    }
+    .hero-badge h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700; color: var(--gold-lt); margin-bottom: 12px;
+    }
+    .hero-badge p { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 20px; }
+    .discount-tag {
+      display: inline-block;
+      background: var(--red); color: var(--white);
+      font-weight: 700; font-size: 20px;
+      padding: 10px 24px; border-radius: 8px;
+    }
+
+    /* PARTNERS */
+    .partners { background: var(--cream); padding: 36px 32px; border-bottom: 1px solid var(--border); }
+    .partners-inner { max-width: 1100px; margin: 0 auto; }
+    .partners p { text-align: center; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 24px; font-weight: 500; }
+    .partner-logos { display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap; }
+    .partner-logos img { height: 36px; object-fit: contain; filter: grayscale(60%); opacity: .7; transition: filter .2s, opacity .2s; }
+    .partner-logos img:hover { filter: none; opacity: 1; }
+
+    /* CLIENT LOGOS TICKER */
+    .client-logos { padding: 40px 32px; background: var(--white); overflow: hidden; }
+    .logos-track {
+      display: flex; gap: 48px; align-items: center;
+      animation: scroll-logos 28s linear infinite;
+      width: max-content;
+    }
+    .logos-track img { height: 44px; object-fit: contain; filter: grayscale(70%); opacity: .65; flex-shrink: 0; }
+    @keyframes scroll-logos { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* SECTION SHARED */
+    section { padding: 80px 32px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3.5vw, 48px); font-weight: 800; line-height: 1.2; color: var(--ink); }
+    .section-title em { color: var(--gold); font-style: normal; }
+    .section-sub { margin-top: 16px; font-size: 16px; line-height: 1.75; color: var(--muted); max-width: 640px; }
+
+    /* BOOKS */
+    .books-section { background: linear-gradient(180deg, #f9f5ee 0%, var(--white) 100%); }
+    .books-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+    .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 28px; }
+    .book-card {
+      background: var(--white); border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden; transition: transform .25s, box-shadow .25s;
+      cursor: pointer;
+    }
+    .book-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+    .book-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
+    .book-card-body { padding: 16px; }
+    .book-card-body h4 { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .book-card-body p { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+    .book-card-body a { font-size: 13px; font-weight: 600; color: var(--gold); text-decoration: none; }
+    .book-card-body a:hover { text-decoration: underline; }
+
+    /* PROCESS */
+    .process-section { background: var(--ink); color: var(--white); }
+    .process-section .section-title { color: var(--white); }
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; margin-top: 56px; }
+    .process-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px; padding: 32px; position: relative;
+      transition: background .2s, border-color .2s;
+    }
+    .process-card:hover { background: rgba(201,168,76,.08); border-color: rgba(201,168,76,.3); }
+    .process-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px; font-weight: 900;
+      color: rgba(201,168,76,.2); line-height: 1;
+      margin-bottom: 16px;
+    }
+    .process-card h3 { font-size: 17px; font-weight: 600; color: var(--gold-lt); margin-bottom: 12px; }
+    .process-card p { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.7; }
+
+    /* WHY US */
+    .why-section { background: var(--cream); }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 56px; }
+    .why-card {
+      background: var(--white); border-radius: 14px;
+      padding: 36px 32px; border: 1px solid var(--border);
+      transition: box-shadow .25s, border-color .25s;
+    }
+    .why-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,.08); border-color: var(--gold); }
+    .why-icon { width: 56px; height: 56px; margin-bottom: 20px; }
+    .why-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--ink); }
+    .why-card p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+    /* CTA BAND */
+    .cta-band {
+      background: linear-gradient(135deg, var(--gold) 0%, #a87c2e 100%);
+      color: var(--white); text-align: center;
+      padding: 64px 32px;
+    }
+    .cta-band h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3vw, 42px); font-weight: 800; margin-bottom: 12px; }
+    .cta-band p { font-size: 17px; opacity: .9; margin-bottom: 32px; }
+    .btn-white {
+      background: var(--white); color: var(--gold);
+      font-weight: 700; font-size: 15px;
+      padding: 14px 36px; border-radius: 8px;
+      text-decoration: none; display: inline-block;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.2); }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: rgba(255,255,255,.75); }
+    .footer-top {
+      max-width: 1280px; margin: 0 auto;
+      padding: 72px 32px 48px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand img { height: 52px; margin-bottom: 20px; filter: brightness(1.1); }
+    .footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,.55); margin-bottom: 24px; }
+    .footer-contact a {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13.5px; color: rgba(255,255,255,.65); text-decoration: none;
+      margin-bottom: 10px; transition: color .15s;
+    }
+    .footer-contact a:hover { color: var(--gold-lt); }
+    footer h4 { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a { font-size: 13.5px; color: rgba(255,255,255,.6); text-decoration: none; text-transform: capitalize; transition: color .15s; }
+    footer ul li a:hover { color: var(--gold-lt); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 20px 32px;
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,.4); }
+    .social-links { display: flex; gap: 14px; }
+    .social-links a {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.5); font-size: 14px; text-decoration: none;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .social-links a:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
+
+    /* MOBILE NAV */
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; background: var(--ink);
+      z-index: 999; flex-direction: column; padding: 24px;
+      overflow-y: auto;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .mobile-nav-header img { height: 40px; filter: brightness(1.2); }
+    .close-btn { background: none; border: none; cursor: pointer; color: var(--white); font-size: 28px; }
+    .mobile-nav a { display: block; color: rgba(255,255,255,.8); text-decoration: none; font-size: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); text-transform: capitalize; }
+    .mobile-nav a:hover { color: var(--gold-lt); }
+    .mobile-nav .sub { padding-left: 20px; font-size: 14px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav, .btn-chat { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-badge { display: none; }
+      section { padding: 56px 20px; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">🎉 Limited Time Offer — Get up to <span>60% OFF</span> on all services! Sign Up Now</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <img src="https://storycrafterz.com/wp-content/uploads/2026/01/Story-Crafterz-Logo-01-1-1-1024x445.png" alt="Storycrafterz"/>
+    </a>
+    <nav>
+      <div class="nav-item">
+        <a href="#">Ghost Writing <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#">Book Writing</a>
+          <a href="#">Non-Fiction</a>
+          <a href="#">Biography Writing</a>
+          <a href="#">Memoir Writing</a>
+          <a href="#">Script Writing</a>
+          <a href="#">Novel Writing</a>
+          <a href="#">Fiction Writing</a>
+          <a href="#">Story Writing</a>
+          <a href="#">E-Book Writing</a>
+          <a href="#">Children's Books</a>
+          <a href="#">Song Writing</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#">Book Editing & Formatting <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#">Book Editing</a>
+          <a href="#">Book Proofreading</a>
+          <a href="#">Book Cover Design</a>
+          <a href="#">Book Formatting</a>
+          <a href="#">Book Translation</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="#">Book Publishing</a></div>
+      <div class="nav-item">
+        <a href="#">Other Services <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#">Book Marketing</a>
+          <a href="#">Children's Book Illustration</a>
+          <a href="#">Audiobook</a>
+          <a href="#">Copyrights & ISBN</a>
+          <a href="#">Author Website Design</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="#">Book Printing</a></div>
+      <div class="nav-item"><a href="#">Pricing</a></div>
+      <div class="nav-item"><a href="#">Contact Us</a></div>
+    </nav>
+    <a href="tel:+14343580669" class="btn-chat">Chat Now</a>
+    <div class="hamburger" onclick="document.getElementById('mobileNav').classList.add('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/Story-Crafterz-Logo-03-1-1-1024x435.png" alt="Storycrafterz"/>
+    <button class="close-btn" onclick="document.getElementById('mobileNav').classList.remove('open')">✕</button>
+  </div>
+  <a href="#">Ghost Writing</a>
+  <a href="#" class="sub">Book Writing</a>
+  <a href="#" class="sub">Non-Fiction</a>
+  <a href="#" class="sub">Biography Writing</a>
+  <a href="#" class="sub">Memoir Writing</a>
+  <a href="#" class="sub">Script / Novel / Fiction Writing</a>
+  <a href="#">Book Editing & Formatting</a>
+  <a href="#" class="sub">Editing · Proofreading · Cover Design</a>
+  <a href="#">Book Publishing</a>
+  <a href="#">Book Printing</a>
+  <a href="#">Pricing</a>
+  <a href="#">Contact Us</a>
+  <br/>
+  <a href="tel:+14343580669" style="color:var(--gold);font-weight:600;">📞 (434) 358 0669</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-tag">✦ Top-Ranked Ghostwriting Agency</span>
+      <h1>Get Good Impressions with <em>Story-Crafterz</em></h1>
+      <p>For all genres, our authors and ghostwriters have a track record of generating top-notch work — eBook ghostwriting, comic scripts, speech writing, and SEO content that keeps readers turning pages.</p>
+      <div class="hero-btns">
+        <a href="tel:+14343580669" class="btn-primary">Chat Now</a>
+        <a href="#contact" class="btn-secondary">Request a Quote</a>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <h3>Get Up to 60% OFF</h3>
+      <p>Limited-time offer for new clients. Sign up today and let our experienced ghostwriters bring your story to life.</p>
+      <span class="discount-tag">60% OFF</span>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners">
+  <div class="partners-inner">
+    <p>Trusted & Verified Partnerships</p>
+    <div class="partner-logos">
+      <img src="https://storycrafterz.com/wp-content/uploads/2026/01/Amazon-Ads-Verified-Partner-Logo.png" alt="Amazon Ads Verified Partner"/>
+      <img src="https://storycrafterz.com/wp-content/uploads/2026/01/bingads-partner-2024.png" alt="Bing Ads Partner"/>
+      <img src="https://storycrafterz.com/wp-content/uploads/2026/01/google-partner.png" alt="Google Partner"/>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENT LOGOS TICKER -->
+<div class="client-logos">
+  <div class="logos-track">
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-1.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-2.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-3.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-4.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-5.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-6.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-7-Copy.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-8-Copy.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-9-Copy.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-10-Copy.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-11.webp" alt=""/>
+    <!-- duplicate for seamless loop -->
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-1.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-2.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-3.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-4.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-5.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-6.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-7-Copy.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-8-Copy.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-9-Copy.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-10-Copy.webp" alt=""/>
+    <img src="https://storycrafterz.com/wp-content/uploads/2026/01/logo-11.webp" alt=""/>
+  </div>
+</div>
+
+<!-- BOOKS SHOWCASE -->
+<section class="books-section">
+  <div class="section-inner">
+    <div class="books-header">
+      <div>
+        <p class="section-label">Our Portfolio</p>
+        <h2 class="section-title">We Leave No Stone Unturned to<br/><em>Mesmerize Your Audience</em></h2>
+      </div>
+    </div>
+    <div class="books-grid">
+      <div class="book-card">
+        <img src="https://storycrafterz.com/wp-content/uploads/2026/01/5-3.png" alt="The Wolfcatcher's Son"/>
+        <div class="book-card-body">
+          <h4>The Wolfcatcher's Son</h4>
+          <p>Capturing your experiences, we enable you to be heard on a global scale.</p>
+          <a href="#">Get Started →</a>
+        </div>
+      </div>
+      <div class="book-card">
+        <img src="https://storycrafterz.com/wp-content/uploads/2026/01/4-3.png" alt="Dream Walker"/>
+        <div class="book-card-body">
+          <h4>Dream Walker</h4>
+          <p>Using words that properly capture your experiences, we make you a recognized name.</p>
+          <a href="#">Get Started →</a>
+        </div>
+      </div>
+      <div class="book-card">
+        <img src="https://storycrafterz.com/wp-content/uploads/2026/01/3-3.png" alt="Good Bad Real"/>
+        <div class="book-card-body">
+          <h4>Good Bad Real</h4>
+          <p>Our ghostwriters bring your vision to life with compelling narratives.</p>
+          <a href="#">Get Started →</a>
+        </div>
+      </div>
+      <div class="book-card">
+        <img src="https://storycrafterz.com/wp-content/uploads/2026/01/2-4.png" alt="Adventures in Lacacia"/>
+        <div class="book-card-body">
+          <h4>Adventures in Lacacia</h4>
+          <p>An imaginative journey crafted with precision, delivering content readers treasure.</p>
+          <a href="#">Get Started →</a>
+        </div>
+      </div>
+      <div class="book-card">
+        <img src="https://storycrafterz.com/wp-content/uploads/2026/01/1-5.png" alt="Trent's Choo-Choo"/>
+        <div class="book-card-body">
+          <h4>Trent's Choo-Choo</h4>
+          <p>Beautifully illustrated children's stories that spark imagination.</p>
+          <a href="#">Get Started →</a>
+        </div>
+      </div>
+      <div class="book-card">
+        <img src="https://storycrafterz.com/wp-content/uploads/2026/01/1-4.png" alt="Cedric's Lost Shoe"/>
+        <div class="book-card-body">
+          <h4>Cedric's Lost Shoe</h4>
+          <p>Charming, heartfelt tales that connect with children and parents alike.</p>
+          <a href="#">Get Started →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="section-inner">
+    <p class="section-label" style="color:var(--gold);">How We Work</p>
+    <h2 class="section-title">We Appreciate The Value of a <em>Well-Told Story</em></h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.65);">We are renowned for producing the highest-caliber ghostwriting while ensuring complete client satisfaction.</p>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <h3>Examining & Drafting Outline</h3>
+        <p>We take time to understand your requirements and concept before developing a storyline through extensive research.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <h3>Original Content Based on Your Vision</h3>
+        <p>Once the outline is approved, our writer begins developing unique, engaging material built around your core idea.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <h3>Analytical Review, Editing & Proofreading</h3>
+        <p>After editing is complete, the manuscript is proofread and refined to align fully with your guidelines.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-num">04</div>
+        <h3>Designing, Formatting & Typesetting</h3>
+        <p>The finalized layout is shared with you for approval while the manuscript is carefully formatted to perfection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-section">
+  <div class="section-inner">
+    <p class="section-label">Why Choose Us</p>
+    <h2 class="section-title">We Bring Your <em>Ideas to Life</em></h2>
+    <p class="section-sub">Your creative team's creative team — experienced, confidential, affordable, and always by your side.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <img class="why-icon" src="https://storycrafterz.com/wp-content/uploads/2026/01/1-1.png" alt="Experienced Ghostwriters"/>
+        <h3>Experienced Ghostwriters</h3>
+        <p>With ingenuity and skill, our talented ghostwriters deliver astounding services and ensure quality never suffers.</p>
+      </div>
+      <div class="why-card">
+        <img class="why-icon" src="https://storycrafterz.com/wp-content/uploads/2026/01/2.png" alt="Privacy"/>
+        <h3>Privacy</h3>
+        <p>Privacy is crucial. We take decisive action to guarantee the security of your data, building trust with every client.</p>
+      </div>
+      <div class="why-card">
+        <img class="why-icon" src="https://storycrafterz.com/wp-content/uploads/2026/01/3.png" alt="Affordability"/>
+        <h3>Affordability</h3>
+        <p>No additional fees or royalties. We provide economical ghostwriting services with flexible payment options.</p>
+      </div>
+      <div class="why-card">
+        <img class="why-icon" src="https://storycrafterz.com/wp-content/uploads/2026/01/4.png" alt="Customer Satisfaction"/>
+        <h3>Customer Satisfaction</h3>
+        <p>We listen, maintain a continuous relationship with you, and deliver precisely what you desire — until you're happy.</p>
+      </div>
+      <div class="why-card">
+        <img class="why-icon" src="https://storycrafterz.com/wp-content/uploads/2026/01/5.png" alt="Dynamic Stories"/>
+        <h3>Dynamic Stories</h3>
+        <p>Our best storytellers and experienced writers are unequaled in the business when it comes to compelling narratives.</p>
+      </div>
+      <div class="why-card">
+        <img class="why-icon" src="https://storycrafterz.com/wp-content/uploads/2026/01/6.png" alt="24/7 Support"/>
+        <h3>24/7 Customer Support</h3>
+        <p>A dedicated account manager handles your project. Our helpful customer service agents are available around the clock.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Ready to Tell Your Story?</h2>
+  <p>Join hundreds of satisfied authors who trusted Storycrafterz to bring their vision to life.</p>
+  <a href="tel:+14343580669" class="btn-white">Get a Free Consultation</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="https://storycrafterz.com/wp-content/uploads/2026/01/Story-Crafterz-Logo-03-1-1-1024x435.png" alt="Storycrafterz"/>
+      <p>Your creative team's creative team — delivering top-ranked ghostwriting, editing, publishing, and marketing services for authors worldwide.</p>
+      <div class="footer-contact">
+        <a href="tel:+14343580669">📞 (434) 358 0669</a>
+        <a href="mailto:infostorycrafterz@gmail.com">✉ infostorycrafterz@gmail.com</a>
+        <a href="#">📍 1301 4th Avenue Ext, Farmville, VA 23901, USA</a>
+      </div>
+    </div>
+    <div>
+      <h4>Ghost Writing</h4>
+      <ul>
+        <li><a href="#">Book Writing</a></li>
+        <li><a href="#">Non-Fiction</a></li>
+        <li><a href="#">Biography Writing</a></li>
+        <li><a href="#">Memoir Writing</a></li>
+        <li><a href="#">Script Writing</a></li>
+        <li><a href="#">Novel Writing</a></li>
+        <li><a href="#">Fiction Writing</a></li>
+        <li><a href="#">Story Writing</a></li>
+        <li><a href="#">E-Book Writing</a></li>
+        <li><a href="#">Children's Books</a></li>
+        <li><a href="#">Song Writing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Book Editing</h4>
+      <ul>
+        <li><a href="#">Book Editing</a></li>
+        <li><a href="#">Proofreading</a></li>
+        <li><a href="#">Cover Design</a></li>
+        <li><a href="#">Book Formatting</a></li>
+        <li><a href="#">Book Translation</a></li>
+      </ul>
+      <br/>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#">Book Publishing</a></li>
+        <li><a href="#">Book Printing</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Other Services</h4>
+      <ul>
+        <li><a href="#">Book Marketing</a></li>
+        <li><a href="#">Children's Illustration</a></li>
+        <li><a href="#">Audiobook</a></li>
+        <li><a href="#">Copyrights & ISBN</a></li>
+        <li><a href="#">Author Website Design</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>©2026 Author Story Crafterz. All Rights Reserved.</p>
+    <div class="social-links">
+      <a href="#" title="Facebook">f</a>
+      <a href="#" title="Twitter">𝕏</a>
+      <a href="#" title="YouTube">▶</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('mobileNav').addEventListener('click', function(e){
+    if(e.target === this) this.classList.remove('open');
+  });
+</script>
+</body>
+</html>
